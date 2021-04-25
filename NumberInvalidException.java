@@ -22,7 +22,7 @@ public class NumberInvalidException extends Exception {
         return escolha;
     }
 
-// Bluetooth
+    // Bluetooth
 
     public Bluetooth corrigePrecoBluetooth(Bluetooth blue) { // Preço do fone bluetooth
 
@@ -42,7 +42,7 @@ public class NumberInvalidException extends Exception {
     }
 
     public Bluetooth corrigeTipoBluetooth(Bluetooth blue) { // Tipo Bluetooth
-        try { 
+        try {
             blue.setTipoBlue(Float.parseFloat(leitura.entDados("\nTipo de Bluetooth..: ")));
         } catch (NumberFormatException nfe) {
             System.out.println("Valor invalido! Digite somente numeros");
@@ -60,7 +60,7 @@ public class NumberInvalidException extends Exception {
 
     public Bluetooth corrigeDuracaoBat(Bluetooth blue) { // Duração da bateria
 
-        try { 
+        try {
             blue.setDuracaoBat(Integer.parseInt(leitura.entDados("\nDuracao da Bateria em horas: ")));
         } catch (NumberFormatException nfe) {
             System.out.println("Erro! Digite um numero inteiro.");
@@ -142,7 +142,7 @@ public class NumberInvalidException extends Exception {
         return blue;
     }
 
-// Com Cabo
+    // Com Cabo
 
     public ComCabo corrigePrecoComCabo(ComCabo cabo) { // Preço do fone com cabo
         try {

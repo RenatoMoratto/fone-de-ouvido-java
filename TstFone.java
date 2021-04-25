@@ -10,10 +10,12 @@ public class TstFone {
 		Bluetooth blue = new Bluetooth();
 		ComCabo cabo = new ComCabo();
 		Escolhas escolha = new Escolhas();
+		Imprime imprimir = new Imprime();
 
 		do { // Continua o programa enquanto o usuário desejar
 
-			// ==================================== Definindo ====================================
+			// ==================================== Definindo
+			// ====================================
 			System.out.println("\n===== Cadastro de Fones de Ouvido =====\n");
 			System.out.print((totFones + 1) + " Fone de ouvido:");
 
@@ -240,50 +242,18 @@ public class TstFone {
 
 			System.out.println("\nObrigado por informar!\n\n");
 
-			// ==================================== Imprimindo ====================================
+			// ====================================
+			// Imprimindo
+			// ====================================
 
 			// Fone de Ouvido
 			switch (escolha.getTipoFone()) { // Recebe o tipo de fone
 			case 1: // Bluetooth
-				System.out.println("===== Fone Bluetooth - " + blue.getMarca() + " =====");
-				System.out.println("\nModelo...: " + blue.getModelo());
-				System.out.println("Stereo...: " + blue.getStereo());
-				System.out.println("Preco....: R$ " + blue.getPreco());
-				System.out.println("Tipo de Bluetooth...: " + blue.getTipoBlue());
-				System.out.println("Duracao da Bateria...: " + blue.getDuracaoBat() + " horas");
-
-				// Acessorios
-				System.out.println("\n===== Acessorios do Fone =====");
-				System.out.println("Case...: " + blue.getAcess().getCase());
-				System.out.println("Borrachas reserva...: " + blue.getAcess().getBorRes());
-
-				// Avaliação
-				System.out.println("\n===== Avaliacao do Fone =====");
-				System.out.println("Material...: " + blue.getAval().getMaterial());
-				System.out.println("Qualidade..: " + blue.getAval().getQualidade());
-				System.out.println("Conforto...: " + blue.getAval().getConforto());
-				System.out.println("\nNumero de cadastro do fone bluetooth: " + blue.implementNumCadastro(totFones));
+				imprimir.foneBluetooth(blue, totFones);
 				break;
 
 			case 2: // Com cabo
-				System.out.println("\n===== Fone com Cabo - " + cabo.getMarca() + " =====");
-				System.out.println("Modelo...: " + cabo.getModelo());
-				System.out.println("Stereo...: " + cabo.getStereo());
-				System.out.println("Preco....: R$ " + cabo.getPreco());
-				System.out.println("Comprimento do cabo..: " + cabo.getCompriCabo() + " m");
-				System.out.println("Tipo de Entrada...: " + cabo.getTipoEntrada().toUpperCase());
-
-				// Acessorios
-				System.out.println("\n===== Acessorios do Fone =====");
-				System.out.println("Case...: " + cabo.getAcess().getCase());
-				System.out.println("Borrachas reserva...: " + cabo.getAcess().getBorRes());
-
-				// Avaliação
-				System.out.println("\n===== Avaliacao do Fone =====");
-				System.out.println("Material...: " + cabo.getAval().getMaterial());
-				System.out.println("Qualidade..: " + cabo.getAval().getQualidade());
-				System.out.println("Conforto...: " + cabo.getAval().getConforto());
-				System.out.println("\nNumero de cadastro do fone com cabo: " + cabo.implementNumCadastro(totFones));
+				imprimir.foneComCabo(cabo, totFones);
 				break;
 			}
 			totFones++; // incrementa o numero de fones cadastrados
