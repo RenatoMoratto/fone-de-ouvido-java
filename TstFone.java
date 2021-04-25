@@ -13,12 +13,11 @@ public class TstFone {
 
 		do { // Continua o programa enquanto o usuário desejar
 
-			// ==================================== Definindo
-			// ====================================
+			// ==================================== Definindo ====================================
 			System.out.println("\n===== Cadastro de Fones de Ouvido =====\n");
 			System.out.print((totFones + 1) + " Fone de ouvido:");
 
-			try {
+			try { // Recebe o tipo de fone
 				System.out.println("\n[ 1 ] - Bluetooth\n[ 2 ] - Com cabo");
 				escolha.setTipoFone(Integer.parseInt(leitura.entDados("\nQual o tipo de fone? ")));
 			} catch (NumberInvalidException nie) {
@@ -27,7 +26,6 @@ public class TstFone {
 				escolha = nie.corrigeTipoFone(escolha);
 			} catch (NumberFormatException nfe) {
 				System.out.println("\nO valor precisa ser um  numero!\nDigite um 1 ou 2.");
-				// escolha = nfe.corrigeTipoFone(escolha);
 			}
 
 			switch (escolha.getTipoFone()) {
@@ -41,6 +39,7 @@ public class TstFone {
 					blue.setPreco(Float.parseFloat(leitura.entDados("\nPreco...: R$ ")));
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					blue = nne.corrigePrecoBluetooth(blue);
 				} catch (NumberFormatException nfe) {
 					System.out.println("\nValor Invalido! Digite somente numeros com ponto. Ex.: 00.00");
 				} catch (NumberInvalidException nie) {
@@ -56,6 +55,7 @@ public class TstFone {
 					System.out.println("Versoes existentes de bluetooth: 1, 2, 3, 4 e 5");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					blue = nne.corrigeTipoBluetooth(blue);
 				} catch (NumberInvalidException nie) {
 					nie.numberInvalid();
 					System.out.println("Versoes existentes de bluetooth: 1, 2, 3, 4 e 5");
@@ -68,6 +68,7 @@ public class TstFone {
 					System.out.println("Erro! Digite um numero inteiro.");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					blue = nne.corrigeDuracaoBat(blue);
 				} catch (NumberInvalidException nie) {
 					nie.numberInvalid();
 					System.out.println("Duracao maxima: 200 horas");
@@ -88,6 +89,7 @@ public class TstFone {
 					blue = nie.corrigeBorResBluetooth(blue);
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					blue = nne.corrigeBorResBluetooth(blue);
 				}
 
 				System.out.println("\n===== Avaliacao do Fone =====");
@@ -98,6 +100,7 @@ public class TstFone {
 					System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					blue = nne.corrigeAvalMaterialBluetooth(blue);
 					System.out.println("Digite um numero de 0 a 5.");
 				} catch (NumberInvalidException nie) {
 					nie.numberInvalid();
@@ -112,6 +115,7 @@ public class TstFone {
 					System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					blue = nne.corrigeAvalQualidadeBluetooth(blue);
 					System.out.println("Digite um numero de 0 a 5.");
 				} catch (NumberInvalidException nie) {
 					nie.numberInvalid();
@@ -125,6 +129,7 @@ public class TstFone {
 					System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					blue = nne.corrigeAvalConfortoBluetooth(blue);
 					System.out.println("Digite um numero de 0 a 5.");
 				} catch (NumberInvalidException nie) {
 					nie.numberInvalid();
@@ -144,6 +149,7 @@ public class TstFone {
 					cabo.setPreco(Float.parseFloat(leitura.entDados("\nPreco...: R$ ")));
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					cabo = nne.corrigePrecoComCabo(cabo);
 				} catch (NumberFormatException nfe) {
 					System.out.println("\nValor Invalido! Digite somente numeros com ponto. Ex.: 00.00");
 				} catch (NumberInvalidException nie) {
@@ -161,6 +167,7 @@ public class TstFone {
 					System.out.println("\nErro! Digite somente numeros com ponto. Ex.: 2.5");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					cabo = nne.corrigeCompriCabo(cabo);
 				}
 
 				try { // Tenta receber o tipo de entrada do fone
@@ -185,6 +192,7 @@ public class TstFone {
 					cabo = nie.corrigeBorResComCabo(cabo);
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					cabo = nne.corrigeBorResComCabo(cabo);
 				}
 
 				System.out.println("\n===== Avaliacao do Fone =====");
@@ -197,6 +205,7 @@ public class TstFone {
 					System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					cabo = nne.corrigeAvalMaterialComCabo(cabo);
 				} catch (NumberInvalidException nie) {
 					nie.numberInvalid();
 					cabo = nie.corrigeAvalMaterialComCabo(cabo);
@@ -209,6 +218,7 @@ public class TstFone {
 					System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					cabo = nne.corrigeAvalQualidadeComCabo(cabo);
 				} catch (NumberInvalidException nie) {
 					nie.numberInvalid();
 					cabo = nie.corrigeAvalQualidadeComCabo(cabo);
@@ -220,19 +230,17 @@ public class TstFone {
 					System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
 				} catch (NumberNegatException nne) {
 					nne.numNegat();
+					cabo = nne.corrigeAvalConfortoComCabo(cabo);
 				} catch (NumberInvalidException nie) {
 					nie.numberInvalid();
 					cabo = nie.corrigeAvalConfortoComCabo(cabo);
 				}
-
-				System.out.println("\nNumero de cadastro do fone: " + cabo.implementNumCadastro(totFones));
 				break;
 			}
 
 			System.out.println("\nObrigado por informar!\n\n");
 
-			// ====================================
-			// Imprimindo====================================
+			// ==================================== Imprimindo ====================================
 
 			// Fone de Ouvido
 			switch (escolha.getTipoFone()) { // Recebe o tipo de fone
