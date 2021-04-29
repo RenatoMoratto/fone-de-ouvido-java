@@ -17,12 +17,29 @@ public class NumberNegatException extends Exception {
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigePrecoBluetooth(blue);
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nValor Invalido! Digite somente numeros com ponto. Ex.: 00.00");
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             System.out.println("Maior preco existente: R$ 56000.00");
             nie.corrigePrecoBluetooth(blue);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nValor Invalido! Digite somente numeros com ponto. Ex.: 00.00");
+            while (true) {
+                try {
+                    blue.setPreco(Float.parseFloat(leitura.entDados("\nPreco...: R$ ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigePrecoBluetooth(blue);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Maior preco existente: R$ 56000.00");
+                    nie.corrigePrecoBluetooth(blue);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nValor Invalido! Digite somente numeros com ponto. Ex.: 00.00");
+                }
+            }
         }
         return blue;
     }
@@ -30,9 +47,6 @@ public class NumberNegatException extends Exception {
     public Bluetooth corrigeTipoBluetooth(Bluetooth blue) { // Tipo Bluetooth
         try { // Tenta receber o tipo de bluetooth
             blue.setTipoBlue(Float.parseFloat(leitura.entDados("\nTipo de Bluetooth..: ")));
-        } catch (NumberFormatException nfe) {
-            System.out.println("Valor invalido! Digite somente numeros");
-            System.out.println("Versoes existentes de bluetooth: 1, 2, 3, 4 e 5");
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeTipoBluetooth(blue);
@@ -40,6 +54,27 @@ public class NumberNegatException extends Exception {
             nie.numberInvalid();
             System.out.println("Versoes existentes de bluetooth: 1, 2, 3, 4 e 5");
             nie.corrigeTipoBluetooth(blue);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Valor invalido! Digite somente numeros");
+            System.out.println("Versoes existentes de bluetooth: 1, 2, 3, 4 e 5");
+            while (true) {
+                try { // Tenta receber o tipo de bluetooth
+                    blue.setTipoBlue(Float.parseFloat(leitura.entDados("\nTipo de Bluetooth..: ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigeTipoBluetooth(blue);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Versoes existentes de bluetooth: 1, 2, 3, 4 e 5");
+                    nie.corrigeTipoBluetooth(blue);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("Valor invalido! Digite somente numeros");
+                    System.out.println("Versoes existentes de bluetooth: 1, 2, 3, 4 e 5");
+                }
+            }
         }
         return blue;
     }
@@ -48,8 +83,6 @@ public class NumberNegatException extends Exception {
 
         try {
             blue.setDuracaoBat(Integer.parseInt(leitura.entDados("\nDuracao da Bateria em horas: ")));
-        } catch (NumberFormatException nfe) {
-            System.out.println("Erro! Digite um numero inteiro.");
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeDuracaoBat(blue);
@@ -57,6 +90,25 @@ public class NumberNegatException extends Exception {
             nie.numberInvalid();
             System.out.println("Duracao maxima: 200 horas");
             nie.corrigeDuracaoBat(blue);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Erro! Digite um numero inteiro.");
+            while (true) {
+                try {
+                    blue.setDuracaoBat(Integer.parseInt(leitura.entDados("\nDuracao da Bateria em horas: ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigeDuracaoBat(blue);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Duracao maxima: 200 horas");
+                    nie.corrigeDuracaoBat(blue);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("Erro! Digite um numero inteiro.");
+                }
+            }
         }
         return blue;
     }
@@ -64,8 +116,6 @@ public class NumberNegatException extends Exception {
     public Bluetooth corrigeBorResBluetooth(Bluetooth blue) { // Numero de borrachas reservas
         try {
             blue.getAcess().setBorRes(Integer.parseInt(leitura.entDados("\nPossui quantas borrachas reserva? ")));
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nErro! Digite um numero inteiro.");
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             System.out.println("Numero maximo de borrachas: 20");
@@ -73,6 +123,26 @@ public class NumberNegatException extends Exception {
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeBorResBluetooth(blue);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nErro! Digite um numero inteiro.");
+            while (true) {
+                try {
+                    blue.getAcess()
+                            .setBorRes(Integer.parseInt(leitura.entDados("\nPossui quantas borrachas reserva? ")));
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Numero maximo de borrachas: 20");
+                    nie.corrigeBorResBluetooth(blue);
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigeBorResBluetooth(blue);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nErro! Digite um numero inteiro.");
+                }
+            }
         }
         return blue;
     }
@@ -80,16 +150,34 @@ public class NumberNegatException extends Exception {
     public Bluetooth corrigeAvalMaterialBluetooth(Bluetooth blue) {// Avaliação do material
         try {
             blue.getAval().setMaterial(Integer.parseInt(leitura.entDados("\nMaterial...: ")));
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
         } catch (NumberNegatException nne) {
             nne.numNegat();
-            nne.corrigeAvalMaterialBluetooth(blue);
             System.out.println("Digite um numero de 0 a 5.");
+            nne.corrigeAvalMaterialBluetooth(blue);
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             System.out.println("Digite um numero de 0 a 5.");
             nie.corrigeAvalMaterialBluetooth(blue);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+            while (true) {
+                try {
+                    blue.getAval().setMaterial(Integer.parseInt(leitura.entDados("\nMaterial...: ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    System.out.println("Digite um numero de 0 a 5.");
+                    nne.corrigeAvalMaterialBluetooth(blue);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Digite um numero de 0 a 5.");
+                    nie.corrigeAvalMaterialBluetooth(blue);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+                }
+            }
         }
         return blue;
     }
@@ -97,16 +185,34 @@ public class NumberNegatException extends Exception {
     public Bluetooth corrigeAvalQualidadeBluetooth(Bluetooth blue) {// Avaliação da qualidade
         try {
             blue.getAval().setQualidade(Integer.parseInt(leitura.entDados("\nQualidade..: ")));
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
         } catch (NumberNegatException nne) {
             nne.numNegat();
-            nne.corrigeAvalQualidadeBluetooth(blue);
             System.out.println("Digite um numero de 0 a 5.");
+            nne.corrigeAvalQualidadeBluetooth(blue);
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             System.out.println("Digite um numero de 0 a 5.");
             nie.corrigeAvalQualidadeBluetooth(blue);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+            while (true) {
+                try {
+                    blue.getAval().setQualidade(Integer.parseInt(leitura.entDados("\nQualidade..: ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    System.out.println("Digite um numero de 0 a 5.");
+                    nne.corrigeAvalQualidadeBluetooth(blue);
+                    break;                    
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Digite um numero de 0 a 5.");
+                    nie.corrigeAvalQualidadeBluetooth(blue);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+                }
+            }
         }
         return blue;
     }
@@ -114,8 +220,6 @@ public class NumberNegatException extends Exception {
     public Bluetooth corrigeAvalConfortoBluetooth(Bluetooth blue) {// Avaliação do conforto
         try {
             blue.getAval().setConforto(Integer.parseInt(leitura.entDados("\nConforto..: ")));
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeAvalConfortoBluetooth(blue);
@@ -124,6 +228,26 @@ public class NumberNegatException extends Exception {
             nie.numberInvalid();
             System.out.println("Digite um numero de 0 a 5.");
             nie.corrigeAvalConfortoBluetooth(blue);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+            while (true) {
+                try {
+                    blue.getAval().setConforto(Integer.parseInt(leitura.entDados("\nConforto..: ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    System.out.println("Digite um numero de 0 a 5.");
+                    nne.corrigeAvalConfortoBluetooth(blue);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Digite um numero de 0 a 5.");
+                    nie.corrigeAvalConfortoBluetooth(blue);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+                }
+            }
         }
         return blue;
     }
@@ -136,12 +260,29 @@ public class NumberNegatException extends Exception {
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigePrecoComCabo(cabo);
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nValor Invalido! Digite somente numeros com ponto. Ex.: 00.00");
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             System.out.println("Maior preco existente: R$ 56000.00");
             nie.corrigePrecoComCabo(cabo);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nValor Invalido! Digite somente numeros com ponto. Ex.: 00.00");
+            while (true) {
+                try {
+                    cabo.setPreco(Float.parseFloat(leitura.entDados("\nPreco...: R$ ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigePrecoComCabo(cabo);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Maior preco existente: R$ 56000.00");
+                    nie.corrigePrecoComCabo(cabo);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nValor Invalido! Digite somente numeros com ponto. Ex.: 00.00");
+                }
+            }
         }
         return cabo;
     }
@@ -153,11 +294,28 @@ public class NumberNegatException extends Exception {
             nie.numberInvalid();
             System.out.println("Comprimento maximo: 6.0 metros");
             nie.corrigeCompriCabo(cabo);
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nErro! Digite somente numeros com ponto. Ex.: 2.5");
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeCompriCabo(cabo);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nErro! Digite somente numeros com ponto. Ex.: 2.5");
+            while (true) {
+                try { // Tenta receber o comprimento do cabo
+                    cabo.setCompriCabo(Float.parseFloat(leitura.entDados("\nComprimento do cabo em metros: ")));
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    System.out.println("Comprimento maximo: 6.0 metros");
+                    nie.corrigeCompriCabo(cabo);
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigeCompriCabo(cabo);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nErro! Digite somente numeros com ponto. Ex.: 2.5");
+                }
+            }
         }
 
         return cabo;
@@ -166,15 +324,31 @@ public class NumberNegatException extends Exception {
     public ComCabo corrigeBorResComCabo(ComCabo cabo) { // Numero de borrachas reservas do fone com cabo
         try {
             cabo.getAcess().setBorRes(Integer.parseInt(leitura.entDados("\nPossui quantas borrachas reserva? ")));
-
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nErro! Digite um numero inteiro.");
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             nie.corrigeBorResComCabo(cabo);
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeBorResComCabo(cabo);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nErro! Digite um numero inteiro.");
+            while (true) {
+                try {
+                    cabo.getAcess()
+                            .setBorRes(Integer.parseInt(leitura.entDados("\nPossui quantas borrachas reserva? ")));
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    nie.corrigeBorResComCabo(cabo);
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigeBorResComCabo(cabo);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nErro! Digite um numero inteiro.");
+                }
+            }
         }
         return cabo;
     }
@@ -183,14 +357,30 @@ public class NumberNegatException extends Exception {
         try {
             cabo.getAval().setMaterial(Integer.parseInt(leitura.entDados("\nMaterial...: ")));
 
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeAvalMaterialComCabo(cabo);
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             nie.corrigeAvalMaterialComCabo(cabo);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+            while (true) {
+                try {
+                    cabo.getAval().setMaterial(Integer.parseInt(leitura.entDados("\nMaterial...: ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigeAvalMaterialComCabo(cabo);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    nie.corrigeAvalMaterialComCabo(cabo);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+                }
+            }
         }
         return cabo;
     }
@@ -199,14 +389,30 @@ public class NumberNegatException extends Exception {
         try {
             cabo.getAval().setQualidade(Integer.parseInt(leitura.entDados("\nQualidade...: ")));
 
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeAvalQualidadeComCabo(cabo);
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             nie.corrigeAvalQualidadeComCabo(cabo);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+            while (true) {
+                try {
+                    cabo.getAval().setQualidade(Integer.parseInt(leitura.entDados("\nQualidade...: ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigeAvalQualidadeComCabo(cabo);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    nie.corrigeAvalQualidadeComCabo(cabo);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+                }
+            }
         }
         return cabo;
     }
@@ -215,14 +421,30 @@ public class NumberNegatException extends Exception {
         try {
             cabo.getAval().setConforto(Integer.parseInt(leitura.entDados("\nConforto...: ")));
 
-        } catch (NumberFormatException nfe) {
-            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
         } catch (NumberNegatException nne) {
             nne.numNegat();
             nne.corrigeAvalConfortoComCabo(cabo);
         } catch (NumberInvalidException nie) {
             nie.numberInvalid();
             nie.corrigeAvalConfortoComCabo(cabo);
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+            while (true) {
+                try {
+                    cabo.getAval().setConforto(Integer.parseInt(leitura.entDados("\nConforto...: ")));
+                    break;
+                } catch (NumberNegatException nne) {
+                    nne.numNegat();
+                    nne.corrigeAvalConfortoComCabo(cabo);
+                    break;
+                } catch (NumberInvalidException nie) {
+                    nie.numberInvalid();
+                    nie.corrigeAvalConfortoComCabo(cabo);
+                    break;
+                } catch (NumberFormatException nfe1) {
+                    System.out.println("\nValor invalido! Digite um numero de 0 a 5.");
+                }
+            }
         }
         return cabo;
     }

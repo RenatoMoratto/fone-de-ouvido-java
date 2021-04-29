@@ -1,7 +1,9 @@
+//Nome: Renato Willyan Moratto Filho - RA.: 2266270
+
 public class Imprime {
 
 	public void foneBluetooth(Bluetooth blue, int totFones) {	// Imprime os dados do fone bluetooth
-		System.out.println("===== Fone Bluetooth - " + blue.getMarca() + " =====");
+		System.out.println("\n===== Fone Bluetooth - " + blue.getMarca() + " =====");
 		System.out.println("\nModelo...: " + blue.getModelo());
 		System.out.println("Stereo...: " + blue.getStereo());
 		System.out.println("Preco....: R$ " + blue.getPreco());

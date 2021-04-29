@@ -1,35 +1,49 @@
 //Nome: Renato Willyan Moratto Filho - RA.: 2266270
 
 public class Escolhas {
-    
-        private int tipoFone = 0;
-        
-        Leitura leitura = new Leitura();
+	
+	private int tipoFone = 0;
 
-    public boolean continuar(){
-        String a = "";        
-        
-        while(true){
-                a = leitura.entDados("\nDeseja cadastrar mais um fone? [S / N]: ");
-            if(a.equalsIgnoreCase("s")){
-                return true;
-            } else if(a.equalsIgnoreCase("n")){
-                return false;
-            } else{
-                System.out.println("Valor invalido! Digite S ou N.");
-            }
-        }
-    }
-    
-	public void setTipoFone(int tipoFone) throws NumberInvalidException{
-		if(tipoFone != 1 && tipoFone != 2){
+	Leitura leitura = new Leitura();
+
+	public boolean continuar() {	// Recebe se o usuário deseja cadastrar mais fones
+		String a = "";
+
+		while (true) {
+			a = leitura.entDados("\nDeseja cadastrar mais um fone? [S / N]: ");
+			if (a.equalsIgnoreCase("s")) {
+				return true;
+			} else if (a.equalsIgnoreCase("n")) {
+				return false;
+			} else {
+				System.out.println("Valor invalido! Digite S ou N.");
+			}
+		}
+	}
+
+	public void setTipoFone(int tipoFone) throws NumberInvalidException {	// Define o tipo de fone
+		if (tipoFone != 1 && tipoFone != 2) {
 			throw new NumberInvalidException();
 		} else {
 			this.tipoFone = tipoFone;
 		}
 	}
 
-    public int getTipoFone(){
+	public int getTipoFone() {	// Apresenta o valor do fone
 		return tipoFone;
+	}
+
+	public boolean listarFones() {
+		String a = "";
+		while (true) {
+			a = leitura.entDados("\nDeseja visualizar os fones cadastrados? [S / N]: ");
+			if (a.equalsIgnoreCase("s")) {
+				return true;
+			} else if (a.equalsIgnoreCase("n")) {
+				return false;
+			} else {
+				System.out.println("Valor invalido! Digite S ou N.");
+			}
+		}
 	}
 }
