@@ -97,7 +97,13 @@ public class MenuFones {
 					}
 					if (escolha.getTipoFone() == 1) { // Bluetooth
 						blue = new Bluetooth();
-						blue.setModelo(leitura.entDados("\nModelo a consultar: "));
+						try {
+							blue.setModelo(leitura.entDados("\nModelo a consultar: "));
+						} catch (InvalidStringException ise) {
+							ise.invString();
+							ise.corrigeModeloBluetooth(blue);
+						}
+						
 						blue = gerenciaBlue.consultarModeloBluetooth(blue);
 						if (blue != null) {
 							gerenciaBlue.imprimirFoneBluetooth(blue);
@@ -106,7 +112,12 @@ public class MenuFones {
 						}
 					} else { // Com cabo
 						cabo = new ComCabo();
+						try{
 						cabo.setModelo(leitura.entDados("\nModelo a consultar: "));
+							} catch(InvalidStringException ise){
+								ise.invString();
+								cabo = ise.corrigeModeloComCabo(cabo);
+							}
 						cabo = gerenciaCabo.consultarModeloComCabo(cabo);
 						if (cabo != null) {
 							gerenciaCabo.imprimirFoneComCabo(cabo);
@@ -132,7 +143,12 @@ public class MenuFones {
 					}
 					if (escolha.getTipoFone() == 1) { // Bluetooth
 						blue = new Bluetooth();
-						blue.setModelo(leitura.entDados("\nModelo a remover: "));
+						try {
+							blue.setModelo(leitura.entDados("\nModelo a remover: "));
+						} catch (InvalidStringException ise) {
+							ise.invString();
+							blue = ise.corrigeModeloBluetooth(blue);
+						}
 						blue = gerenciaBlue.consultarModeloBluetooth(blue);
 						if (blue != null) {
 							gerenciaBlue.removerFoneBluetooth(blue);
@@ -140,8 +156,12 @@ public class MenuFones {
 							leitura.entDados("\nEste modelo de fone bluetooth não existe! Press <Enter>");
 						}
 					} else { // Com cabo
-						cabo = new ComCabo();
-						cabo.setModelo(leitura.entDados("\nModelo a remover: "));
+						cabo = new ComCabo();try{
+							cabo.setModelo(leitura.entDados("\nModelo a remover: "));
+							} catch(InvalidStringException ise){
+								ise.invString();
+								cabo = ise.corrigeModeloComCabo(cabo);
+							}
 						cabo = gerenciaCabo.consultarModeloComCabo(cabo);
 						if (cabo != null) {
 							gerenciaCabo.removerFoneComCabo(cabo);
@@ -167,7 +187,12 @@ public class MenuFones {
 					}
 					if (escolha.getTipoFone() == 1) { // Bluetooth
 						blue = new Bluetooth();
-						blue.setModelo(leitura.entDados("\nModelo a atualizar: "));
+						try {
+							blue.setModelo(leitura.entDados("\nModelo a atualizar: "));
+						} catch (InvalidStringException ise) {
+							ise.invString();
+							blue = ise.corrigeModeloBluetooth(blue);
+						}
 						blue = gerenciaBlue.consultarModeloBluetooth(blue);
 						if (blue != null) {
 							gerenciaBlue.atualizarFoneBluetooth(blue);
@@ -176,7 +201,12 @@ public class MenuFones {
 						}
 					} else { // Com cabo
 						cabo = new ComCabo();
-						cabo.setModelo(leitura.entDados("\nModelo a atualizar: "));
+						try{
+							cabo.setModelo(leitura.entDados("\nModelo a atualizar: "));
+							} catch(InvalidStringException ise){
+								ise.invString();
+								cabo = ise.corrigeModeloComCabo(cabo);
+							}
 						cabo = gerenciaCabo.consultarModeloComCabo(cabo);
 						if (cabo != null) {
 							gerenciaCabo.atualizarFoneComCabo(cabo);

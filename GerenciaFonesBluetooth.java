@@ -5,13 +5,23 @@ import java.util.ArrayList;
 
 public class GerenciaFonesBluetooth {
 
-	private  List<Bluetooth> bdBlue = new ArrayList<Bluetooth>();
-	private  Leitura leitura = new Leitura();
+	private List<Bluetooth> bdBlue = new ArrayList<Bluetooth>();
+	private Leitura leitura = new Leitura();
 
 	public Bluetooth cadastroFoneBluetooth(Bluetooth blue) {
 		blue.mostraFone();
-		blue.setMarca(leitura.entDados("\nMarca...: "));
-		blue.setModelo(leitura.entDados("\nModelo...: "));
+		try {
+			blue.setMarca(leitura.entDados("\nMarca...: "));
+		} catch (InvalidStringException ise) {
+			ise.invString();
+			blue = ise.corrigeMarcaBluetooth(blue);
+		}
+		try {
+			blue.setModelo(leitura.entDados("\nModelo...: "));
+		} catch (InvalidStringException ise) {
+			ise.invString();
+			blue = ise.corrigeModeloBluetooth(blue);
+		}
 
 		if (consultarModeloBluetooth(blue) != null) {
 			return null;
@@ -141,8 +151,7 @@ public class GerenciaFonesBluetooth {
 
 	public Bluetooth consultarModeloBluetooth(Bluetooth blue) { // busca o modelo do fone bluetooth
 		for (int i = 0; i < bdBlue.size(); i++) {
-			if (blue.getModelo().equalsIgnoreCase(bdBlue.get(i).getModelo())) { // Busca se existe algum fone com o
-																				// mesmo modelo
+			if (blue.getModelo().equalsIgnoreCase(bdBlue.get(i).getModelo())) { // Busca se existe algum fone com o  mesmo modelo
 				return bdBlue.get(i);
 			}
 		}
@@ -168,13 +177,18 @@ public class GerenciaFonesBluetooth {
 		System.out
 				.println("\nNumero de cadastro do fone bluetooth: " + blue.implementNumCadastro(bdBlue.indexOf(blue)));
 	}
-	
+
 	public void removerFoneBluetooth(Bluetooth blue) { // Exclui o fone bluetooth em si
 		bdBlue.remove(blue);
 	}
 
 	public void atualizarFoneBluetooth(Bluetooth blue) {
-		blue.setMarca(leitura.entDados("\nNova marca...: "));
+		try {
+			blue.setMarca(leitura.entDados("\nNova Marca...: "));
+		} catch (InvalidStringException ise) {
+			ise.invString();
+			blue = ise.corrigeMarcaBluetooth(blue);
+		}
 		blue.setStereo(Boolean.parseBoolean(leitura.entDados("\nE stereo? [true / false]: ")));
 		while (true) { // Recebe o Preço
 			try {

@@ -56,12 +56,20 @@ public abstract class FoneDeOuvido{
 			this.stereo = stereo;
 	}
 
-	public void setMarca(String marca){
+	public void setMarca(String marca) throws InvalidStringException{
+		if(marca.isBlank() || marca.equals(null)){
+			throw new InvalidStringException();
+		} else{
 		this.marca = marca;
+		}
 	}
 
-	public void setModelo(String modelo){
-		this.modelo = modelo;
+	public void setModelo(String modelo) throws InvalidStringException{
+		if(modelo.isBlank() || modelo.equals(null)){
+			throw new InvalidStringException();
+		} else{
+			this.modelo = modelo;	
+		}
 	}
 
 	public void setAcess(Acessorios acessorio){

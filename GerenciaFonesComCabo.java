@@ -4,21 +4,32 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class GerenciaFonesComCabo {
-    
-	private  List<ComCabo> bdCabo = new ArrayList<ComCabo>();
-	private  Leitura leitura = new Leitura();
-    
+
+	private List<ComCabo> bdCabo = new ArrayList<ComCabo>();
+	private Leitura leitura = new Leitura();
+
 	public ComCabo cadastroFoneComCabo(ComCabo cabo) {
 		cabo.mostraFone();
-		cabo.setMarca(leitura.entDados("\nMarca...: "));
-		cabo.setModelo(leitura.entDados("\nModelo...: "));
+		try {
+			cabo.setMarca(leitura.entDados("\nMarca...: "));
+		} catch (InvalidStringException ise) {
+			ise.invString();
+			cabo = ise.corrigeMarcaComCabo(cabo);
+		}
+
+		try {
+			cabo.setModelo(leitura.entDados("\nModelo...: "));
+		} catch (InvalidStringException ise) {
+			ise.invString();
+			cabo = ise.corrigeModeloComCabo(cabo);
+		}
 
 		if (consultarModeloComCabo(cabo) != null) {
 			return null;
 		}
 
 		cabo.setStereo(Boolean.parseBoolean(leitura.entDados("\nE stereo? [true / false]: ")));
-		while (true) {
+		while (true) { // Recebe o preço
 			try {
 				cabo.setPreco(Float.parseFloat(leitura.entDados("\nPreco...: R$ ")));
 				break;
@@ -31,7 +42,7 @@ public class GerenciaFonesComCabo {
 				System.out.println("Maior preco existente: R$ 56000.00");
 			}
 		}
-		while (true) {
+		while (true) { // Recebe o comprimento do cabo
 			try {
 				cabo.setCompriCabo(Float.parseFloat(leitura.entDados("\nComprimento do cabo em metros: ")));
 				break;
@@ -44,18 +55,18 @@ public class GerenciaFonesComCabo {
 				nne.numNegat();
 			}
 		}
-		while (true) {
-			try {
-				cabo.setTipoEntrada(leitura.entDados("\nTipo de Entrada...: "));
-				break;
-			} catch (InvalidStringException ise) {
-				ise.invString();
-				System.out.println("Tipos de entrada existentes: p1, p2, p3, p10 e USB");
-			}
+
+		try {
+			cabo.setTipoEntrada(leitura.entDados("\nTipo de Entrada...: "));
+		} catch (InvalidStringException ise) {
+			ise.invString();
+			System.out.println("Tipos de entrada existentes: p1, p2, p3, p10 e USB");
+			cabo = ise.corrigeTipoEntrada(cabo);
 		}
+
 		System.out.println("\n===== Acessorios do Fone =====");
 		cabo.getAcess().setCase(Boolean.parseBoolean(leitura.entDados("\nPossui case? [true / false]: ")));
-		while (true) {
+		while (true) { // Recebe o numero de borrachas reserva
 			try {
 				cabo.getAcess().setBorRes(Integer.parseInt(leitura.entDados("\nPossui quantas borrachas reserva? ")));
 				break;
@@ -71,7 +82,7 @@ public class GerenciaFonesComCabo {
 
 		System.out.println("\n===== Avaliacao do Fone =====");
 		System.out.println("De notas de 0 a 5.");
-		while (true) {
+		while (true) { // Recebe a avaliação do material
 			try {
 				cabo.getAval().setMaterial(Integer.parseInt(leitura.entDados("\nMaterial...: ")));
 				break;
@@ -83,7 +94,7 @@ public class GerenciaFonesComCabo {
 				nie.numberInvalid();
 			}
 		}
-		while (true) {
+		while (true) { // Recebe a avaliação da qualidade
 			try {
 				cabo.getAval().setQualidade(Integer.parseInt(leitura.entDados("\nQualidade..: ")));
 				break;
@@ -95,7 +106,7 @@ public class GerenciaFonesComCabo {
 				nie.numberInvalid();
 			}
 		}
-		while (true) {
+		while (true) { // Recebe a avaliação do conforto
 			try {
 				cabo.getAval().setConforto(Integer.parseInt(leitura.entDados("\nConforto...: ")));
 				break;
@@ -112,8 +123,8 @@ public class GerenciaFonesComCabo {
 		bdCabo.add(cabo);
 		return cabo;
 	}
-    
-    public void listarFonesComCabo() {
+
+	public void listarFonesComCabo() {
 		for (int i = 0; i < bdCabo.size(); i++) { // Imprime os dados do fone com cabo
 
 			System.out.println("\n===== Fone com Cabo - " + bdCabo.get(i).getMarca() + " =====");
@@ -134,8 +145,8 @@ public class GerenciaFonesComCabo {
 			System.out.println("\nNumero de cadastro do fone com cabo: " + bdCabo.get(i).implementNumCadastro(i));
 		}
 	}
-	
-    public ComCabo consultarModeloComCabo(ComCabo cabo) { // busca o modelo do fone com cabo
+
+	public ComCabo consultarModeloComCabo(ComCabo cabo) { // busca o modelo do fone com cabo
 		for (int i = 0; i < bdCabo.size(); i++) {
 			if (cabo.getModelo().equalsIgnoreCase(bdCabo.get(i).getModelo())) { // Busca se existe algum fone com o
 																				// mesmo modelo
@@ -145,7 +156,7 @@ public class GerenciaFonesComCabo {
 		return null;
 	}
 
-    public void imprimirFoneComCabo(ComCabo cabo) {
+	public void imprimirFoneComCabo(ComCabo cabo) {
 		System.out.println("\n===== Fone com Cabo - " + cabo.getMarca() + " =====");
 		System.out.println("Modelo...: " + cabo.getModelo());
 		System.out.println("Stereo...: " + cabo.getStereo());
@@ -153,25 +164,29 @@ public class GerenciaFonesComCabo {
 		System.out.println("Comprimento do cabo..: " + cabo.getCompriCabo() + " m");
 		System.out.println("Tipo de Entrada...: " + cabo.getTipoEntrada().toUpperCase());
 
-		// Acessorios
 		System.out.println("\n===== Acessorios do Fone =====");
 		System.out.println("Case...: " + cabo.getAcess().getCase());
 		System.out.println("Borrachas reserva...: " + cabo.getAcess().getBorRes());
 
-		// Avaliação
 		System.out.println("\n===== Avaliacao do Fone =====");
 		System.out.println("Material...: " + cabo.getAval().getMaterial());
 		System.out.println("Qualidade..: " + cabo.getAval().getQualidade());
 		System.out.println("Conforto...: " + cabo.getAval().getConforto());
 		System.out.println("\nNumero de cadastro do fone com cabo: " + cabo.implementNumCadastro(bdCabo.indexOf(cabo)));
 	}
-    
+
 	public void removerFoneComCabo(ComCabo cabo) { // Exclui o fone com cabo em si
 		bdCabo.remove(cabo);
 	}
 
 	public void atualizarFoneComCabo(ComCabo cabo) {
-		cabo.setMarca(leitura.entDados("\nNova marca...: "));
+		
+		try {
+			cabo.setMarca(leitura.entDados("\nNova marca...: "));
+		} catch (InvalidStringException ise) {
+			ise.invString();
+			cabo = ise.corrigeMarcaComCabo(cabo);
+		}
 		cabo.setStereo(Boolean.parseBoolean(leitura.entDados("\nE stereo? [true / false]: ")));
 		while (true) {
 			try {

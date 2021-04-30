@@ -19,4 +19,43 @@ public class InvalidStringException extends Exception {
         }
         return cabo;
     }
+
+    public ComCabo corrigeMarcaComCabo(ComCabo cabo) { // Marca cabo
+        try {
+            cabo.setMarca(leitura.entDados("\nMarca...: "));
+        } catch (InvalidStringException ise) {
+            ise.invString();
+            ise.corrigeMarcaComCabo(cabo);
+        }
+        return cabo;
+    }
+    public ComCabo corrigeModeloComCabo(ComCabo cabo) { // Modelo cabo
+        try {
+            cabo.setModelo(leitura.entDados("\nModelo...: "));
+        } catch (InvalidStringException ise) {
+            ise.invString();
+            ise.corrigeModeloComCabo(cabo);
+        }
+        return cabo;
+    }
+
+    public Bluetooth corrigeMarcaBluetooth(Bluetooth blue) { // Marca bluetooth
+        try {
+            blue.setMarca(leitura.entDados("\nMarca...: "));
+        } catch (InvalidStringException ise) {
+            ise.invString();
+            ise.corrigeMarcaBluetooth(blue);
+        }
+        return blue;
+    }
+
+    public Bluetooth corrigeModeloBluetooth(Bluetooth blue) { // Modelo bluetooth
+        try {
+            blue.setModelo(leitura.entDados("\nModelo...: "));
+        } catch (InvalidStringException ise) {
+            ise.invString();
+            ise.corrigeModeloBluetooth(blue);
+        }
+        return blue;
+    }
 }
