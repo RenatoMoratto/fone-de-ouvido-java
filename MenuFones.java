@@ -5,7 +5,8 @@ public class MenuFones {
 	private Bluetooth blue;
 	private ComCabo cabo;
 	private Leitura leitura = new Leitura();
-    private GerenciaFones gerencia = new GerenciaFones();
+    private GerenciaFonesBluetooth gerenciaBlue = new GerenciaFonesBluetooth();
+    private GerenciaFonesComCabo gerenciaCabo = new GerenciaFonesComCabo();
 
     public void geraMenuFones() {
 
@@ -15,7 +16,7 @@ public class MenuFones {
 		while (true) {	// Roda o menu
 			System.out.println("\n========== Menu de Opcoes ==========\n");
 			System.out.println("[ 1 ] - Cadastrar fone de ouvido");
-			System.out.println("[ 2 ] - Listar todos os fones");
+			System.out.println("[ 2 ] - Listar fones");
 			System.out.println("[ 3 ] - Consultar fone pelo modelo");
 			System.out.println("[ 4 ] - Remover fone pelo modelo");
 			System.out.println("[ 5 ] - Atualizar fone pelo modelo");
@@ -45,16 +46,39 @@ public class MenuFones {
 					}
 					if (escolha.getTipoFone() == 1) { // Bluetooth
 						blue = new Bluetooth();
-						blue = gerencia.cadastroFoneBluetooth(blue);
+						blue = gerenciaBlue.cadastroFoneBluetooth(blue);
 					} else { // Com cabo
 						cabo = new ComCabo();
-						cabo = gerencia.cadastroFoneComCabo(cabo);
+						cabo = gerenciaCabo.cadastroFoneComCabo(cabo);
 					}
 					break;
 
 				case 2: // Listar
-					System.out.println("\n===== Listar todos os fones =====");
-					gerencia.listarFones();
+					System.out.println("\n===== Listar fones =====");
+					while (true) { // Recebe o tipo de fone (Bluetooth ou Com cabo)
+						try {
+							System.out.println("\nDeseja listar os fones:");
+							System.out.println("\n[ 1 ] - Bluetooth\n[ 2 ] - Com cabo\n[ 3 ] - Todos");
+							escolha.setTipoListagem(Integer.parseInt(leitura.entDados("\nQual o tipo de fone? ")));
+							break;
+						} catch (NumberFormatException nfe) {
+							System.out.println("\nO valor precisa ser um  numero!\nDigite um 1, 2 ou 3.");
+						} catch (NumberInvalidException nie) {
+							nie.numberInvalid();
+							System.out.print("Digite 1, 2 ou 3.\n");
+						}
+					}
+					switch(escolha.getTipoListagem()){
+						case 1:
+							gerenciaBlue.listarFonesBluetooth();
+							break;
+						case 2:
+							gerenciaCabo.listarFonesComCabo();
+							break;
+						default:
+							gerenciaBlue.listarFonesBluetooth();
+							gerenciaCabo.listarFonesComCabo();
+					}
 					break;
 
 				case 3: // Consultar
@@ -74,18 +98,18 @@ public class MenuFones {
 					if (escolha.getTipoFone() == 1) { // Bluetooth
 						blue = new Bluetooth();
 						blue.setModelo(leitura.entDados("\nModelo a consultar: "));
-						blue = gerencia.consultarModeloBluetooth(blue);
+						blue = gerenciaBlue.consultarModeloBluetooth(blue);
 						if (blue != null) {
-							gerencia.imprimirFoneBluetooth(blue);
+							gerenciaBlue.imprimirFoneBluetooth(blue);
 						} else {
 							leitura.entDados("\nEste modelo de fone bluetooth não existe! Press <Enter>");
 						}
 					} else { // Com cabo
 						cabo = new ComCabo();
 						cabo.setModelo(leitura.entDados("\nModelo a consultar: "));
-						cabo = gerencia.consultarModeloComCabo(cabo);
+						cabo = gerenciaCabo.consultarModeloComCabo(cabo);
 						if (cabo != null) {
-							gerencia.imprimirFoneComCabo(cabo);
+							gerenciaCabo.imprimirFoneComCabo(cabo);
 						} else {
 							leitura.entDados("\nEste modelo de fone com cabo não existe! Press <Enter>");
 						}
@@ -109,18 +133,18 @@ public class MenuFones {
 					if (escolha.getTipoFone() == 1) { // Bluetooth
 						blue = new Bluetooth();
 						blue.setModelo(leitura.entDados("\nModelo a remover: "));
-						blue = gerencia.consultarModeloBluetooth(blue);
+						blue = gerenciaBlue.consultarModeloBluetooth(blue);
 						if (blue != null) {
-							gerencia.removerFoneBluetooth(blue);
+							gerenciaBlue.removerFoneBluetooth(blue);
 						} else {
 							leitura.entDados("\nEste modelo de fone bluetooth não existe! Press <Enter>");
 						}
 					} else { // Com cabo
 						cabo = new ComCabo();
 						cabo.setModelo(leitura.entDados("\nModelo a remover: "));
-						cabo = gerencia.consultarModeloComCabo(cabo);
+						cabo = gerenciaCabo.consultarModeloComCabo(cabo);
 						if (cabo != null) {
-							gerencia.removerFoneComCabo(cabo);
+							gerenciaCabo.removerFoneComCabo(cabo);
 						} else {
 							leitura.entDados("\nEste modelo de fone com cabo não existe! Press <Enter>");
 						}
@@ -144,18 +168,18 @@ public class MenuFones {
 					if (escolha.getTipoFone() == 1) { // Bluetooth
 						blue = new Bluetooth();
 						blue.setModelo(leitura.entDados("\nModelo a atualizar: "));
-						blue = gerencia.consultarModeloBluetooth(blue);
+						blue = gerenciaBlue.consultarModeloBluetooth(blue);
 						if (blue != null) {
-							gerencia.atualizarFoneBluetooth(blue);
+							gerenciaBlue.atualizarFoneBluetooth(blue);
 						} else {
 							leitura.entDados("\nEste modelo de fone bluetooth não existe! Press <Enter>");
 						}
 					} else { // Com cabo
 						cabo = new ComCabo();
 						cabo.setModelo(leitura.entDados("\nModelo a atualizar: "));
-						cabo = gerencia.consultarModeloComCabo(cabo);
+						cabo = gerenciaCabo.consultarModeloComCabo(cabo);
 						if (cabo != null) {
-							gerencia.atualizarFoneComCabo(cabo);
+							gerenciaCabo.atualizarFoneComCabo(cabo);
 						} else {
 							leitura.entDados("\nEste modelo de fone com cabo não existe! Press <Enter>");
 						}
@@ -164,7 +188,7 @@ public class MenuFones {
 
 				case 6: // Sair
 					System.out.println("\n===== Sair =====");
-					gerencia.sair();
+					escolha.sair();
 					break;
 
 				default:
@@ -172,5 +196,4 @@ public class MenuFones {
 			}
 		}
 	}
-
 }
