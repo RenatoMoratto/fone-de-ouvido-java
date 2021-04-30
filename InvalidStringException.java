@@ -29,6 +29,7 @@ public class InvalidStringException extends Exception {
         }
         return cabo;
     }
+   
     public ComCabo corrigeModeloComCabo(ComCabo cabo) { // Modelo cabo
         try {
             cabo.setModelo(leitura.entDados("\nModelo...: "));
