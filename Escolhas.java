@@ -6,21 +6,6 @@ public class Escolhas {
 
 	Leitura leitura = new Leitura();
 
-	public boolean continuar() {	// Recebe se o usuário deseja cadastrar mais fones
-		String a = "";
-
-		while (true) {
-			a = leitura.entDados("\nDeseja cadastrar mais um fone? [S / N]: ");
-			if (a.equalsIgnoreCase("s")) {
-				return true;
-			} else if (a.equalsIgnoreCase("n")) {
-				return false;
-			} else {
-				System.out.println("Valor invalido! Digite S ou N.");
-			}
-		}
-	}
-
 	public void setTipoFone(int tipoFone) throws NumberInvalidException {	// Define o tipo de fone
 		if (tipoFone != 1 && tipoFone != 2) {
 			throw new NumberInvalidException();
@@ -31,19 +16,5 @@ public class Escolhas {
 
 	public int getTipoFone() {	// Apresenta o valor do fone
 		return tipoFone;
-	}
-
-	public boolean listarFones() {
-		String a = "";
-		while (true) {
-			a = leitura.entDados("\nDeseja visualizar os fones cadastrados? [S / N]: ");
-			if (a.equalsIgnoreCase("s")) {
-				return true;
-			} else if (a.equalsIgnoreCase("n")) {
-				return false;
-			} else {
-				System.out.println("Valor invalido! Digite S ou N.");
-			}
-		}
 	}
 }
