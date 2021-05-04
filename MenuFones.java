@@ -14,12 +14,12 @@ public class MenuFones {
 		int opcao = 0;
 
 		while (true) {	// Roda o menu
-			System.out.println("\n========== Menu de Opcoes ==========\n");
-			System.out.println("[ 1 ] - Cadastrar fone de ouvido");
-			System.out.println("[ 2 ] - Listar fones");
-			System.out.println("[ 3 ] - Consultar fone pelo modelo");
-			System.out.println("[ 4 ] - Remover fone pelo modelo");
-			System.out.println("[ 5 ] - Atualizar fone pelo modelo");
+			System.out.println("\n========== Fone de Ouvido ==========\n");
+			System.out.println("[ 1 ] - Cadastrar");
+			System.out.println("[ 2 ] - Listar");
+			System.out.println("[ 3 ] - Consultar");
+			System.out.println("[ 4 ] - Remover");
+			System.out.println("[ 5 ] - Atualizar");
 			System.out.println("[ 6 ] - Sair");
 
 			try {
